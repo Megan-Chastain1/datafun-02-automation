@@ -62,26 +62,20 @@ REGIONS = [
 # Pass in an int for the first year
 # Pass in an int for the last year
 #####################################
-
-def create_folders_for_range(start_year: int, end_year: int) -> None:
+def create_folders_from_list(folder_list: list) -> None:
     '''
-    Create folders for a given range of years.
-
+    Create folders based on a list of folder names.
+    
     Arguments:
-    start_year -- The starting year of the range (inclusive).
-    end_year -- The ending year of the range (inclusive).
+    folder_list -- A list of strings representing folder names.
     '''
+    logger.info("FUNCTION: create_folders_from_list()")
+    logger.info(f"PARAMETER: folder_list = {folder_list}")
 
-    # Log function name and parameters
-    logger.info("FUNCTION: create_folders_for_range()")
-    logger.info(f"PARAMETERS: start_year = {start_year}, end_year = {end_year}")
-
-
-
- for year in range(start_year, end_year + 1):
-    #     year_path = ROOT_DIR / str(year)
-    #     year_path.mkdir(exist_ok=True)
-    #     logger.info(f"Created folder: {year_path}")
+for year in range(2020, 2023 + 1):
+       year_path = ROOT_DIR / str(year)
+       year_path.mkdir(exist_ok=True)
+       logger.info(f"Created folder: {year_path}")
   
 #####################################
 # Define Function 2. For Item in List: 
@@ -101,16 +95,11 @@ def create_folders_from_list(folder_list: list) -> None:
 
     logger.info("FUNCTION: create_folders_from_list()")
     logger.info(f"PARAMETER: folder_list = {folder_list}")
-for name in folder_list:
-        folder_path = ROOT_DIR / name
+    for folder_name in folder_list:
+        folder_path = ROOT_DIR / folder_name
         folder_path.mkdir(exist_ok=True)
         logger.info(f"Created folder: {folder_path}")
-    
-
-
-    
-
-
+     
   
 #####################################
 # Define Function 3. List Comprehension: 
@@ -135,7 +124,6 @@ def create_prefixed_folders_using_list_comprehension(folder_list: list, prefix: 
     for folder_path in [ROOT_DIR / f"{prefix}{name}" for name in folder_list]:
         folder_path.mkdir(exist_ok=True)
         logger.info(f"Created folder: {folder_path}")
-    .
     
 
   
@@ -193,6 +181,12 @@ def create_standardized_folders(folder_list: list, to_lowercase: bool = False, r
     logger.info("FUNCTION: create_standardized_folders()")
     logger.info(f"PARAMETERS: folder_list = {folder_list}, to_lowercase = {to_lowercase}, remove_spaces = {remove_spaces}")
 
+def create_folders_for_range(start_year, end_year):
+    for year in range(start_year, end_year + 1):
+        year_path = ROOT_DIR / str(year)
+        year_path.mkdir(exist_ok=True)
+        logger.info(f"Created folder: {year_path}")
+
    
   
 #####################################
@@ -207,19 +201,19 @@ def main() -> None:
     logger.info("#####################################\n")
 
     
-    logger.info(f"Byline: {utils_Megan.py get_byline()}")
+    logger.info(f"Byline: {utils_Megan.get_byline()}")
 
     # Call function 1 to create folders for a range (e.g. years)
     create_folders_for_range(start_year=2020, end_year=2023)
 
     # Call function 2 to create folders given a list
-    folder_names = ['data-csv', 'data-excel', 'data-json']
-    create_folders_from_list(folder_names)
+    folder_name = ['data-csv', 'data-excel', 'data-json']
+    create_folders_from_list(folder_name)
 
     # Call function 3 to create folders using list comprehension
     folder_names = ['csv', 'excel', 'json']
     prefix = 'output-'
-    create_prefixed_folders_using_list_comprehension(folder_names, prefix)
+    create_prefixed_folders_using_list_comprehension(folder_name, prefix)
 
     # Call function 4 to create folders periodically using while
     duration_secs:int = 5  # duration in seconds
